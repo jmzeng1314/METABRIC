@@ -36,3 +36,35 @@
 
 还有一个 100M的 文件是 `data_CNA.txt` 和一个 500M的文件 `data_expression.txt`
 
+### 记录一下GitHub小技巧
+
+主要是是删除本地文件后提交到GitHub上面。
+
+```
+rm tmp.pdf 
+git add -A 
+git commit -a -m 'rm tmp'
+git push -u origin master
+```
+
+
+
+
+
+### 检查全局突变情况
+
+整理文章的突变信息，然后使用maftools即可出图，如下：
+
+![](figures/oncoplot_top30_metabric.png)
+
+可以看到，突变频率比较高的基因是： PIK3CA,TP53,MUC16,AHNAK2,SYNE1,KMT2C,GATA3,MAP3K1,CDH1 , 接下来就可以对这些基因进行针对性分析。
+
+### 基因突变与否分组进行生存分析
+
+取突变频率比较高的基因做生存分析，发现PIK3CA的确是突变频率非常高，但是与生存无关，如下所示：
+
+![](figures/survival_based_on_PIK3CA_mutation.png)
+
+然后就查阅文献发现有人研究了这一点：
+
+发表于 Breast Cancer Research 2017文章是：[*PIK3CA* mutations are common in lobular carcinoma *in situ,* but are not a biomarker of progression](https://doi.org/10.1186/s13058-016-0789-y)  

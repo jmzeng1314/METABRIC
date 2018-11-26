@@ -27,7 +27,10 @@ load(file=file.path(wkdir,'data','metabric_mutations.Rdata'))
 dim(mut)
 mut[1:4,1:4]
 maf
-
+colnames(mut)
+tmp=as.data.frame(table(unique(mut[,c("Hugo_Symbol","Tumor_Sample_Barcode" )])[,1]))
+metebric_mut_freq=tmp[order(tmp$Freq),]
+save(metebric_mut_freq,file = 'metebric_mut_freq.Rdata')
 
 
 
