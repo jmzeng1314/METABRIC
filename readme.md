@@ -57,7 +57,7 @@ git push -u origin master
 
 ![](figures/oncoplot_top30_metabric.png)
 
-可以看到，突变频率比较高的基因是： PIK3CA,TP53,MUC16,AHNAK2,SYNE1,KMT2C,GATA3,MAP3K1,CDH1 , 接下来就可以对这些基因进行针对性分析。
+可以看到，突变频率比较高的基因是： `PIK3CA,TP53,MUC16,AHNAK2,SYNE1,KMT2C,GATA3,MAP3K1,CDH1` , 接下来就可以对这些基因进行针对性分析。
 
 ### 基因突变与否分组进行生存分析
 

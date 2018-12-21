@@ -37,6 +37,7 @@ clin$PATIENT_ID = gsub('-','.',clin$PATIENT_ID)
 phe=clin[match(colnames(expr),clin$PATIENT_ID),]
 phe$gene=as.numeric(expr['BRCA1',])
 colnames(phe)
+table(phe$HER2_SNP6)
 library(ggstatsplot)
 library(ggplot2)
 ggbetweenstats(data = phe, x = HER2_SNP6,  y = gene)

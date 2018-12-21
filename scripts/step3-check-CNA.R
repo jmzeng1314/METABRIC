@@ -26,6 +26,10 @@ load(file=file.path(wkdir,'data','metabric_CNA.Rdata'))
 load(file=file.path(wkdir,'data','metabric_clinical.Rdata'))
 dim(CNA)
 CNA[1:4,1:4]
+tail(sort(ncol(CNA)-apply(CNA,1,function(x) sum(x==0))))
+table(as.numeric(CNA['DISC1',]))
+
+
 
 
 
