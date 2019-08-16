@@ -1,13 +1,16 @@
+## 
+### ---------------
 ###
-### Create: Jianming Zeng
-### Date: 2018-11-26 12:04:33
+### Create: Jianming Zeng 
 ### Email: jmzeng1314@163.com
 ### Blog: http://www.bio-info-trainee.com/
 ### Forum:  http://www.biotrainee.com/thread-1376-1-1.html
 ### CAFS/SUSTC/Eli Lilly/University of Macau
-### Update Log: 2018-11-26  First version
+### Update Log: 2018-08-10  First version
+### Update Log: 2019-08-16  second version codes (R version 3.5.1 (2018-07-02))
 ###
 ### ---------------
+
 rm(list = ls())
 wkdir=getwd()
 options(stringsAsFactors = F)
@@ -59,12 +62,13 @@ x=x[pam50genes$probe[pam50genes$probe %in% rownames(x)] ,]
 dim(x)
 tmp=data.frame(group=group_list,subtypes=subtypes)
 rownames(tmp)=colnames(x)
+table(tmp)
 library(pheatmap)
 
 
 pheatmap(x,show_rownames = T,show_colnames = F,
-         annotation_col = tmp,
-         filename = 'ht_by_pam50_raw.png') 
+         annotation_col = tmp, 
+         filename = file.path(wkdir,'figures','ht_by_pam50_raw.png') ) 
 
 
 x=t(scale(t(x)))
@@ -73,7 +77,7 @@ x[x< -1.6]= -1.6
 
 pheatmap(x,show_rownames = T,show_colnames = F,
          annotation_col = tmp,
-         filename = 'ht_by_pam50_scale.png') 
+         filename = file.path(wkdir,'figures','ht_by_pam50_scale.png') ) 
 
 
 

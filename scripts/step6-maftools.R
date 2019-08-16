@@ -1,15 +1,17 @@
 ## 
 ### ---------------
 ###
-### Create: Jianming Zeng
-### Date: 2018-08-10 17:07:49
+### Create: Jianming Zeng 
 ### Email: jmzeng1314@163.com
 ### Blog: http://www.bio-info-trainee.com/
 ### Forum:  http://www.biotrainee.com/thread-1376-1-1.html
 ### CAFS/SUSTC/Eli Lilly/University of Macau
 ### Update Log: 2018-08-10  First version
+### Update Log: 2019-08-16  second version codes (R version 3.5.1 (2018-07-02))
 ###
 ### ---------------
+
+
 rm(list = ls())
 wkdir=getwd()
 options(stringsAsFactors = F)
@@ -71,6 +73,7 @@ if(F){
   
 }
 
+# 更多
 
 #We will run mutExclusive on top 10 mutated genes. 
 somaticInteractions(maf = laml, top = 25, pvalue = c(0.05, 0.1))

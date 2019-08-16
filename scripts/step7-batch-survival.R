@@ -1,18 +1,20 @@
 ## 
 ### ---------------
 ###
-### Create: Jianming Zeng
-### Date: 2018-08-10 17:07:49
+### Create: Jianming Zeng 
 ### Email: jmzeng1314@163.com
 ### Blog: http://www.bio-info-trainee.com/
 ### Forum:  http://www.biotrainee.com/thread-1376-1-1.html
 ### CAFS/SUSTC/Eli Lilly/University of Macau
 ### Update Log: 2018-08-10  First version
+### Update Log: 2019-08-16  second version codes (R version 3.5.1 (2018-07-02))
 ###
 ### ---------------
+
 rm(list = ls())
 options(stringsAsFactors = F)
 wkdir=getwd()
+# 可以根据 somatic点突变和拷贝数变异来对病人进行分组后进行生存分析。
 load(file = file.path(wkdir,'data','metabric_mut_positions.Rdata'))
 load(file=file.path(wkdir,'data','metabric_clinical.Rdata'))
 load(file=file.path(wkdir,'data','metabric_mutations.Rdata'))
@@ -27,6 +29,7 @@ clin[1:4,1:4]
 # 生存分析也经常采用Kaplan-Meier曲线及log-rank检验
 table(clin$VITAL_STATUS)
 table(clin$OS_STATUS)
+# 理论上这个时候需要区分 Died of Disease和Other Causes
 phe=clin[clin$OS_STATUS %in% c('DECEASED','LIVING'),]
  
 phe$event=ifelse(phe$OS_STATUS=='DECEASED',1,0)
@@ -37,7 +40,14 @@ sfit <- survfit(Surv(time, event)~ER_IHC, data=phe)
 sfit
 summary(sfit)
 ggsurvplot(sfit, conf.int=F, pval=TRUE)
+# 保存为图片，很有趣， 早期ER_IHC是可以区分生存的，但是到了10年（120个月）后，又逆转了。
+# 真的是很有趣哦
 
+# 值得一提的是，在文章：
+#Comparison of the Performance of 6 Prognostic Signatures
+#for Estrogen Receptor–Positive Breast Cancer
+#A Secondary Analysis of a Randomized Clinical Trial
+# 就是把病人区分为 0-5年， 5-10年，有兴趣的读者朋友也可以继续探索。
 png(file=file.path(wkdir,'figures','survival_based_on_ER_IHC.png')
     ,res=200,width = 1080,height = 1080)
 ggsurvplot(sfit,
@@ -46,7 +56,12 @@ ggsurvplot(sfit,
            ggtheme =theme_light(), 
            ncensor.plot = TRUE)
 dev.off()
-## 同理可以针对其它colnames(phe)变量来做生存分析。
+## 同理可以针对其它colnames(phe)变量来做生存分析，这里就不一一演示
+
+
+# 后面的代码，做的事情太复杂，不一一注释解读了。
+# 参考：https://mp.weixin.qq.com/s/efI8U2lb3UfMwLp94iqw1Q
+# apply家族函数和for循环还是有区别的（批量生存分析出图bug）
 
 ###################################################
 ##First do survival analysis based on mutations####
